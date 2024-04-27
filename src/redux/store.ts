@@ -1,20 +1,4 @@
-// 'use client'
-// import { configureStore } from '@reduxjs/toolkit';
-// import taskReducer from './TaskSlice'
-
-// export const store = configureStore({
-//   reducer: {
-//     tasks: taskReducer,
-//   },
-// });
-
-// store.subscribe(() => {
-//   localStorage.setItem('tasks', JSON.stringify(store.getState().tasks));
-// });
-
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
-// store.ts
+'use client'
 import { configureStore } from '@reduxjs/toolkit';
 import taskReducer from './TaskSlice';
 
@@ -23,11 +7,11 @@ const loadState = () => {
   try {
     const serializedState = localStorage.getItem('tasks');
     if (serializedState === null) {
-      return undefined;  // No stored state found
+      return undefined;  //if No stored state found
     }
     return { tasks: JSON.parse(serializedState) };
   } catch (err) {
-    return undefined;  // Handle errors e.g., JSON parsing error
+    return undefined;  // Handle errors like JSON parsing error
   }
 };
 
