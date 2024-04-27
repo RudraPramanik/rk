@@ -37,10 +37,7 @@ const taskSlice = createSlice({
         task.title = action.payload.title;
       }
     },
-    // Directly set the tasks array to the payload
-    // hydrateTasks: (state, action: PayloadAction<Task[]>) => {
-    //   state.tasks = action.payload; 
-    // },
+   
   },
 });
 
