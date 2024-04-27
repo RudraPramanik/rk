@@ -1,32 +1,32 @@
 'use client'
-import React, { useState } from 'react';
+
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addTask } from '@/app/redux/TaskSlice';
-// import { useDispatch } from 'react-redux';
-// import { addTask } from '../redux/taskSlice';
+import { addTask } from '@/redux/TaskSlice'; 
 
 interface TaskFormProps {
   onAddTask: (title: string) => void;
 }
-
+interface FormValues{
+    title: string
+}
 const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
-  const [title, setTitle] = useState('');
+    // Initialize useForm hook
+  const { register, handleSubmit, reset } = useForm<FormValues>(); 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = ({ title }: { title: string }) => {
     if (title.trim()) {
-      onAddTask(title.trim());
-      setTitle('');
+      dispatch(addTask({ id: Date.now().toString(), title, completed: false })); 
+      reset(); 
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        {...register('title', { required: true })} 
         placeholder="Add a new task"
       />
       <button type="submit">Add Task</button>

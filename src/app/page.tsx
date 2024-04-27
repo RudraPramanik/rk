@@ -4,7 +4,7 @@ import Image from "next/image";
 import TaskList from "@/components/TaskList";
 import TaskForm from "@/components/TaskForm";
 import { useDispatch } from 'react-redux';
-import { addTask } from "./redux/TaskSlice";
+import { addTask } from "../redux/TaskSlice";
 export default function Home() {
   const dispatch = useDispatch();
 
@@ -22,6 +22,7 @@ export default function Home() {
   return (
     <div>
       <TaskForm onAddTask={handleAddTask} />
+      {/* <TaskLists/> */}
       <TaskList />
     </div>
   );

@@ -1,13 +1,13 @@
 'use client'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   completed: boolean;
 }
 
-interface TaskState {
+export interface TaskState {
   tasks: Task[];
 }
 
@@ -37,6 +37,10 @@ const taskSlice = createSlice({
         task.title = action.payload.title;
       }
     },
+    // Directly set the tasks array to the payload
+    // hydrateTasks: (state, action: PayloadAction<Task[]>) => {
+    //   state.tasks = action.payload; 
+    // },
   },
 });
 
