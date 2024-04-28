@@ -20,7 +20,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="my-4 sm:my-8" >
       <TaskForm onAddTask={handleAddTask} />
       {/* <TaskLists/> */}
       <TaskList />
