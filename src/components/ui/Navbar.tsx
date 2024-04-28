@@ -22,7 +22,7 @@ const clickHandle= ()=>{
 }
 
   return (
-    <nav className="bg-[#190340] relative">
+    <nav className="bg-[#190340]  relative">
       <div className="container mx-auto px-4 py-2 md:flex sm:items-center p-2 ">
         <div className="flex items-center justify-between py-2">
           <Link href="/">
@@ -44,7 +44,7 @@ const clickHandle= ()=>{
           </button>
         </div>
         {/* navigation */}
-        <div className="hidden md:flex flex-grow justify-end md:right-0 md:space-x-8 mr-6 ">
+        <div className="hidden md:flex text-gray-100 flex-grow justify-end md:right-0 md:space-x-8 mr-6 ">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               <Text variant="bodySm" className="text-gray-100" fontWeight="medium">
