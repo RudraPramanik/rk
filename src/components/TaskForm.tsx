@@ -4,6 +4,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addTask } from '@/redux/TaskSlice'; 
+import Container from './ui/Container';
+import Text from './ui/Text';
 
 interface TaskFormProps {
   onAddTask: (title: string) => void;
@@ -24,13 +26,23 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        {...register('title', { required: true })} 
+    <Container>
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto mt-10">
+            <Text variant='headingMd' fontWeight='semibold' >Add your task</Text>
+            <input
+        {...register('title', { required: true })}
+        type="text"
         placeholder="Add a new task"
+        className="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
       />
-      <button type="submit">Add Task</button>
+      <button
+        type="submit"
+        className=" max-w-32 my-4 mx-auto flex px-4 py-2 font-bold text-white bg-[#321857] rounded hover:bg-[#110a1c] focus:outline-none focus:shadow-outline"
+      >
+        Add Task
+      </button>   
     </form>
+    </Container>
   );
 };
 

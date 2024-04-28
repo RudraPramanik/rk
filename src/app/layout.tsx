@@ -5,6 +5,7 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
 import { useEffect } from "react";
+import Navbar from "@/components/ui/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,12 @@ export default function RootLayout({
   }, []);
   return (
     <html lang="en">
-      <body>
+      <body className=" bg-[#f1f0fa]" >
         <Provider store={store} >
-        {children}
+          <div>
+            <Navbar/>
+          {children}
+          </div>
         </Provider>
         </body>
     </html>

@@ -1,10 +1,19 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeTask, toggleTaskCompleted, updateTaskTitle } from '@/redux/TaskSlice';
-import { RootState } from '@/redux/store';
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeTask,
+  toggleTaskCompleted,
+  updateTaskTitle,
+} from "@/redux/TaskSlice";
+import { RootState } from "@/redux/store";
+import Button from "./ui/Button";
+import Container from "./ui/Container";
+import Card from "./ui/Card";
+import Text from "./ui/Text";
+import Link from "next/link";
 
 interface Task {
   id: string;
@@ -44,53 +53,77 @@ const TaskList: React.FC = () => {
   };
 
   return (
-    <ul className="list-none p-0">
-      {tasks.map((task) => (
-        <li key={task.id} className="flex items-center justify-between bg-gray-100 p-2 rounded mb-2 shadow">
-          {editTaskId === task.id ? (
-            <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2 flex-grow">
-              <input
-                {...register('title', { required: true })}
-                className="flex-grow px-2 py-1 rounded border border-gray-300"
-                autoFocus
-              />
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-              >
-                Update
-              </button>
-            </form>
-          ) : (
-            <>
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={() => handleToggleCompleted(task.id)}
-                className="form-checkbox h-5 w-5 text-blue-600"
-              />
-              <span
-                className={`flex-grow text-lg ${task.completed ? ' text-purple-950 bg-red-200 ' : ''}`}
-              >
-                {task.title}
-              </span>
-              <button
-                onClick={() => handleRemoveTask(task.id)}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-              >
-                Remove
-              </button>
-              <button
-                onClick={() => handleEditTask(task)}
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded"
-              >
-                Edit
-              </button>
-            </>
-          )}
-        </li>
-      ))}
-    </ul>
+    <Container>
+      <ul className="list-none p-0 grid grid-cols-1 sm:grid-cols-2 gap-4 ">
+        {tasks.map((task) => (
+          <Card key={task.id} className=" bg-secondary  p-4 ">
+            <li className="flex flex-col">
+              {editTaskId === task.id ? (
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex items-center gap-2 flex-grow "
+                >
+                  <input
+                    {...register("title", { required: true })}
+                    className="flex-grow px-2 py-1 rounded border border-gray-300"
+                    autoFocus
+                  />
+                  <button
+                    type="submit"
+                    className="bg-gray-600 hover:bg-gray-800 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Update
+                  </button>
+                </form>
+              ) : (
+                <>
+                  <div className="flex flex-row space-x-4 items-center py-4 ">
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={() => handleToggleCompleted(task.id)}
+                      className="form-checkbox h-5 w-5 text-blue-600"
+                    />
+                    <Text variant="bodyMd"> Mark as done </Text>
+                  </div>
+                  {/*  */}
+                  <div className="space-x-4 flex justify-between ">
+                    <Link href={`tasks/${task.id}`}>
+                      <span
+                        className={` text-lg ${
+                          task.completed ? " text-gray-600 " : "text-black"
+                        }`}
+                      >
+                        Task: {task.title}
+                      </span>
+                    </Link>
+
+                    <button
+                      onClick={() => handleEditTask(task)}
+                      className=" bg-[#442f7a] hover:bg-primary text-white font-bold py-1 px-2 rounded"
+                    >
+                      Update
+                    </button>
+                  </div>
+                  {/*  */}
+                  <div className="flex flex-row justify-between my-4 ">
+                    <button className="bg-primary hover:bg-[#130438] text-white font-bold py-1 px-2 rounded">
+                      <Link href={`tasks/${task.id}`}>Task Details</Link>
+                    </button>
+                    <button
+                      onClick={() => handleRemoveTask(task.id)}
+                      className="bg-[#360e75] hover:bg-primary text-white font-bold py-1 px-2 rounded"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </>
+              )}
+            </li>
+          </Card>
+        ))}
+      </ul>
+    </Container>
   );
 };
 
