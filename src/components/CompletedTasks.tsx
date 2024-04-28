@@ -59,7 +59,7 @@ const CompletedTasks: React.FC = () => {
         >
           Completed Tasks
         </Text>
-        <ul className="list-none p-0 grid grid-cols-1 sm:grid-cols-3 gap-4  ">
+        <ul className="list-none p-0 grid grid-cols-1 sm:grid-cols-3 gap-4 my-6  ">
           {completedTasks.length > 0 ? (
             completedTasks.map((task) => (
               <Card
@@ -85,9 +85,9 @@ const CompletedTasks: React.FC = () => {
             </li>
           )}
         </ul>
-        <Link href="/">
-          <Button variant="primary" size="sm">
-            <div className="text-gray-100">Back to Home</div>
+        <Link href="/" className="" >
+          <Button variant="primary" size="sm" >
+            <div className="text-gray-100" >Back to Home</div>
           </Button>
         </Link>
       </div>
